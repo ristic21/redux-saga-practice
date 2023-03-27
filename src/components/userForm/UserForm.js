@@ -9,8 +9,7 @@ import { username } from "../../store/userForm/slice";
 
      const user = useSelector(userSelector);
 
-     console.log('user iz reduxa: ', user
-     )
+     console.log('user iz reduxa: ', user)
     const dispatch = useDispatch();
    
     const [inputMail, setInputMail] = useState('user@email.com')
@@ -21,9 +20,9 @@ import { username } from "../../store/userForm/slice";
         dispatch(username(inputName));
     }
 
-    return <div>
+    return (<div>
             <div>
-                <p>Username:{user.username} Email:{user.email}</p>
+                {/* <p>Username:{user?.username} Email:{user?.email}</p> */}
                 
                 <label htmlFor="email">Email</label>
                 <input name="email" onChange={(e) => setInputMail(e.target.value)} value={inputMail}></input>
@@ -32,7 +31,7 @@ import { username } from "../../store/userForm/slice";
                 <button onClick={handleGetUser}>Set another user</button>
                 
             </div>
-        </div>
+        </div>)
     
 }
 

@@ -5,7 +5,8 @@ import { userSelector } from "../../store/userForm/selectors";
 const UserTextComponent = () => {
     const user = useSelector(userSelector);
     return <div>
-        Result: {user}
+        Username: {user.username}
+        Email: {user.email}
     </div>
 }
 
