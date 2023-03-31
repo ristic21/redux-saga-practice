@@ -1,13 +1,26 @@
-import { configureStore } from '@reduxjs/toolkit'
-import counterReducer from './counter/slice'
-import userReducer from './userForm/slice'
+import { configureStore } from "@reduxjs/toolkit";
+import counterReducer from "./counter/slice";
+import userReducer from "./userForm/slice";
+import createSagaMiddleware from "@redux-saga/core";
+import { watchResetCounter } from "./counter/saga";
+import sagas from "./sagas";
 
+const sagaMiddleware = createSagaMiddleware();
 
 const store = configureStore({
   reducer: {
     counter: counterReducer,
-    user: userReducer
+    user: userReducer,
   },
-})
+  middleware: (getDefaultMiddleware) => {
+    return [...getDefaultMiddleware(), sagaMiddleware];
+  },
+});
 
-export default store
+for (let saga in sagas) {
+  sagaMiddleware.run(sagas[saga]);
+}
+
+// sagaMiddleware.run(watchResetCounter);
+
+export default store;
